@@ -19,8 +19,7 @@
     "allowMultiple": false,
     "defaultSection": "right",
     "defaults": {
-      "refreshIntervalSec": 5,
-      "showLabel": true
+      "refreshIntervalSec": 5
     },
     "schema": [
       {
@@ -31,12 +30,6 @@
         "max": 60,
         "step": 1,
         "defaultValue": 5
-      },
-      {
-        "key": "showLabel",
-        "type": "boolean",
-        "label": "Show Pangolin label on the bar",
-        "defaultValue": true
       }
     ]
   }

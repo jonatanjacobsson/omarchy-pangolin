@@ -28,9 +28,9 @@ omarchy bar add tinkin.pangolin --section right
 | `T` in the panel | Connect or disconnect |
 | `R` in the panel | Refresh status |
 
-While connected, the bar shows **Pangolin** at full theme color with the official pixel mark. Disconnected, the label reads **Pangolin off** and the icon is crossed.
+The bar shows only the [Pangolin mark](https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pangolin.svg): filled orange when connected, greyed out when not.
 
-Connecting from the bar needs admin rights to create the tunnel device. Pangolin would normally call `sudo`, which fails with no terminal. This plugin forwards that through `pkexec` so Omarchy can show the usual password or fingerprint prompt.
+Connecting from the bar needs admin rights to create the tunnel device. The widget calls `pkexec` the same way Omarchy’s Tailscale widget does, so the usual password or fingerprint dialog can authorize a short-lived `pangolin-olm` systemd unit.
 
 ## Requirements
 
@@ -47,4 +47,4 @@ That does not log out of Pangolin or stop a tunnel that is already up.
 
 ## License
 
-MIT. The Pangolin name and pixel mark belong to [Fossorial](https://github.com/fosrl).
+MIT. The Pangolin name and mark belong to [Fossorial](https://github.com/fosrl). The bar SVG is the [Homarr dashboard icon](https://github.com/homarr-labs/dashboard-icons).

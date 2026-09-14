@@ -16,18 +16,15 @@ Panel {
   property int siteIndex: 0
   property bool cursorActive: false
 
-  readonly property bool showLabel: setting("showLabel", true) !== false && !(bar && bar.vertical)
   readonly property color foreground: bar ? bar.foreground : Color.foreground
   readonly property color urgent: bar ? bar.urgent : Color.urgent
   readonly property color dim: Qt.darker(foreground, 1.55)
   readonly property string fontFamily: bar ? bar.fontFamily : Style.font.family
-  readonly property color iconColor: pangolin.active ? foreground : dim
-  readonly property color barIconColor: pangolin.active ? barForeground : Qt.darker(barForeground, 1.55)
+  readonly property color mutedIcon: bar ? Qt.darker(barForeground, 1.55) : dim
   readonly property string toggleHint: pangolin.active ? "Disconnect Pangolin" : "Connect Pangolin"
   readonly property bool headerHasCursor: cursorActive && focusSection === "header" && pangolin.installed
   readonly property color hoverFill: bar ? Style.hoverFillFor(bar.foreground, Color.accent) : "transparent"
   readonly property bool showSites: pangolin.active && pangolin.sites.length > 0
-  readonly property string barLabel: pangolin.active ? "Pangolin" : "Pangolin off"
 
   function selectedSite() {
     if (pangolin.sites.length === 0) return null
@@ -162,24 +159,12 @@ Panel {
     Row {
       id: contentRow
       anchors.centerIn: parent
-      spacing: Style.space(6)
 
       PangolinIcon {
         id: barIcon
         iconSize: Style.space(11)
-        color: root.barIconColor
-        crossed: !pangolin.active
-        anchors.verticalCenter: parent.verticalCenter
-      }
-
-      Text {
-        visible: root.showLabel
-        text: root.barLabel
-        color: button.foreground
-        font.family: root.fontFamily
-        font.pixelSize: Style.font.body
-        font.bold: pangolin.active
-        anchors.verticalCenter: parent.verticalCenter
+        color: root.mutedIcon
+        filled: pangolin.active
       }
     }
   }
@@ -247,12 +232,12 @@ Panel {
               }
               foreground: root.foreground
               fontFamily: root.fontFamily
-              iconOpacity: pangolin.active ? 1.0 : 0.5
+              iconOpacity: 1.0
               iconComponent: Component {
                 PangolinIcon {
                   iconSize: Style.font.display
-                  color: root.iconColor
-                  crossed: !pangolin.active
+                  color: root.dim
+                  filled: pangolin.active
                 }
               }
 

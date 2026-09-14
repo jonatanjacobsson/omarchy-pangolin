@@ -7,4 +7,14 @@ else
   PANGOLIN=$(command -v pangolin)
 fi
 
-exec "$PANGOLIN" down
+if "$PANGOLIN" down; then
+  exit 0
+fi
+
+# The bar starts the tunnel as a root systemd unit. If the API is already
+# gone, stop that unit through the same polkit prompt as connect.
+if /usr/bin/systemctl is-active --quiet pangolin-olm.service; then
+  exec /usr/bin/pkexec /bin/systemctl stop pangolin-olm.service
+fi
+
+exit 1

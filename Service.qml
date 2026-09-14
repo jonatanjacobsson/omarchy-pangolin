@@ -135,7 +135,7 @@ Item {
 
   function up() {
     _desired = 1
-    runAction([pluginDir() + "/connect.sh"], "Approve the system prompt to start Pangolin…")
+    runAction(["pkexec", "/bin/bash", pluginDir() + "/connect.sh"], "Approve the system prompt to start Pangolin…")
   }
 
   function down() {
